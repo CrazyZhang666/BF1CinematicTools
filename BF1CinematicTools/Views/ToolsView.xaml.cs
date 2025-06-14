@@ -1,6 +1,7 @@
 ﻿using BF1CinematicTools.Helper;
 using BF1CinematicTools.Utils;
 using CommunityToolkit.Mvvm.Input;
+using System.Threading.Tasks;
 
 namespace BF1CinematicTools.Views;
 
@@ -12,6 +13,33 @@ public partial class ToolsView : UserControl
     public ToolsView()
     {
         InitializeComponent();
+    }
+
+    [RelayCommand]
+    private async Task ClearCinematicData()
+    {
+        try
+        {
+            if (ProcessHelper.IsAppRun(CoreUtil.Name_BF1))
+            {
+                NotifierHelper.Warning("战地1正在运行，请关闭后再执行清理电影工具数据操作");
+                return;
+            }
+
+            var cinematicDir = Path.Combine(Globals.BF1InstallDir, "Cinematic Tools");
+            if (Directory.Exists(cinematicDir))
+                await FileHelper.DeleteDirectoryAsync(cinematicDir);
+
+            var imguiIniFile = Path.Combine(Globals.BF1InstallDir, "imgui.ini");
+            if (File.Exists(imguiIniFile))
+                await FileHelper.DeleteFileAsync(imguiIniFile);
+
+            NotifierHelper.Success("执行电影工具数据操作成功");
+        }
+        catch (Exception ex)
+        {
+            LoggerHelper.Error($"清理电影工具数据发生异常", ex);
+        }
     }
 
     [RelayCommand]

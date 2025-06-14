@@ -22,6 +22,11 @@
         <WrapPanel VerticalAlignment="Center">
             <ui:IconButton
                 Margin="2.5"
+                Command="{Binding ClearCinematicDataCommand}"
+                Content="清理电影工具数据"
+                Icon="&#xE74D;" />
+            <ui:IconButton
+                Margin="2.5"
                 Command="{Binding ClearModDataCommand}"
                 Content="清理Mod数据"
                 Icon="&#xE74D;" />
