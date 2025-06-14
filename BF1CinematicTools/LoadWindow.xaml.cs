@@ -54,17 +54,22 @@ public partial class LoadWindow
                 FileHelper.ClearDirectory(CoreUtil.Dir_Service);
                 DisplayLoadState("清理缓存文件成功");
 
-                DisplayLoadState("正在解压资源文件1/3...");
+                DisplayLoadState("正在解压资源文件1/4...");
                 FileHelper.ExtractResFile("Data.Frosty.zip", CoreUtil.File_Frosty);
                 ZipFile.ExtractToDirectory(CoreUtil.File_Frosty, CoreUtil.Dir_Frosty, true);
                 File.Delete(CoreUtil.File_Frosty);
 
-                DisplayLoadState("正在解压资源文件2/3...");
+                DisplayLoadState("正在解压资源文件2/4...");
                 FileHelper.ExtractResFile("Data.Marne.zip", CoreUtil.File_Marne);
                 ZipFile.ExtractToDirectory(CoreUtil.File_Marne, CoreUtil.Dir_Marne, true);
                 File.Delete(CoreUtil.File_Marne);
 
-                DisplayLoadState("正在解压资源文件3/3...");
+                DisplayLoadState("正在解压资源文件3/4...");
+                FileHelper.ExtractResFile("Data.CTBF1.zip", CoreUtil.File_CTBF1);
+                ZipFile.ExtractToDirectory(CoreUtil.File_CTBF1, CoreUtil.Dir_CTBF1, true);
+                File.Delete(CoreUtil.File_CTBF1);
+
+                DisplayLoadState("正在解压资源文件4/4...");
                 FileHelper.ExtractResFile("Data.Service.zip", CoreUtil.File_Service);
                 ZipFile.ExtractToDirectory(CoreUtil.File_Service, CoreUtil.Dir_Service, true);
                 File.Delete(CoreUtil.File_Service);

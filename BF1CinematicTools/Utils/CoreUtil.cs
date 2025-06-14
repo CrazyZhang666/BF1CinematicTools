@@ -10,6 +10,7 @@ public static class CoreUtil
 
     public static string Dir_Frosty { get; private set; }
     public static string Dir_Marne { get; private set; }
+    public static string Dir_CTBF1 { get; private set; }
     public static string Dir_Service { get; private set; }
 
     public static string Dir_Config { get; private set; }
@@ -25,6 +26,7 @@ public static class CoreUtil
     #region 数据目录
     public static string File_Frosty { get; private set; }
     public static string File_Marne { get; private set; }
+    public static string File_CTBF1 { get; private set; }
     public static string File_Service { get; private set; }
 
     public static string File_Config_ManagerConfig { get; private set; }
@@ -67,6 +69,7 @@ public static class CoreUtil
 
         Dir_Frosty = Path.Combine(Dir_Default, "Frosty");
         Dir_Marne = Path.Combine(Dir_Default, "Marne");
+        Dir_CTBF1 = Path.Combine(Dir_Default, "CTBF1");
         Dir_Service = Path.Combine(Dir_Default, "Service");
 
         Dir_Config = Path.Combine(Dir_Default, "Config");
@@ -93,6 +96,7 @@ public static class CoreUtil
         #region 数据目录
         File_Frosty = Path.Combine(Dir_Frosty, "Frosty.zip");
         File_Marne = Path.Combine(Dir_Marne, "Marne.zip");
+        File_CTBF1 = Path.Combine(Dir_Marne, "CTBF1.zip");
         File_Service = Path.Combine(Dir_Service, "Service.zip");
 
         File_Config_ManagerConfig = Path.Combine(Dir_Config, "manager_config.json");
