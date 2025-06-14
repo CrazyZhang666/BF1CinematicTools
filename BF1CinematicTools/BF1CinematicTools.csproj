@@ -35,7 +35,7 @@
 		<DebugType>none</DebugType>
 		<DebugSymbols>false</DebugSymbols>
 	</PropertyGroup>
-
+	
 	<ItemGroup>
 		<ProjectReference Include="..\ModernWpf\ModernWpf.csproj" />
 	</ItemGroup>
@@ -57,38 +57,6 @@
 		<Resource Include="Assets\Icons\Favicon.ico" />
 		<Resource Include="Assets\Images\BF1Logo.png" />
 		<Resource Include="Assets\Images\FrostyModManager.png" />
-		<Resource Include="Assets\Images\Maps\MP_Alps.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Amiens.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Beachhead.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Blitz.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Bridge.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Chateau.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Desert.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_FaoFortress.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Fields.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Forest.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Giant.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Graveyard.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Harbor.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Hell.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Islands.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_ItalianCoast.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_London.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_MountainFort.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Naval.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Offensive.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Ravines.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Ridge.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_River.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Scar.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Shoveltown.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Suez.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Trench.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Tsaritsyn.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Underworld.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Valley.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Verdun.jpg" />
-		<Resource Include="Assets\Images\Maps\MP_Volga.jpg" />
 		<Resource Include="Assets\Images\MarneLauncher.png" />
 		<Resource Include="Assets\Images\Regions\ar_SA.png" />
 		<Resource Include="Assets\Images\Regions\de_DE.png" />
@@ -106,6 +74,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Include="Assets\Files\Data\dinput8.dll" />
 		<EmbeddedResource Include="Assets\Files\Data\Frosty.zip" />
 		<EmbeddedResource Include="Assets\Files\Data\Marne.zip" />
 		<EmbeddedResource Include="Assets\Files\Data\PROFSAVE.zip" />

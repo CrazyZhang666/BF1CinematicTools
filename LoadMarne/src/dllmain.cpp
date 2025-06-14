@@ -60,18 +60,6 @@ void DetourHookOff()
 	DetourTransactionCommit();
 }
 
-// 内存补丁
-void MemPath(__int64 patch, BYTE value)
-{
-	DWORD oldProtect;
-	BYTE* lpAddress;
-
-	lpAddress = (BYTE*)patch;
-	VirtualProtect(lpAddress, 1, PAGE_EXECUTE_READWRITE, &oldProtect);
-	*lpAddress = value;
-	VirtualProtect(lpAddress, 1, oldProtect, &oldProtect);
-}
-
 // 核心方法
 void Core()
 {
@@ -97,14 +85,14 @@ void Core()
 		ThreadSleep(20);
 	}
 
-	ThreadSleep(200);
-
 	// 获取数据文件夹路径    
 	PWSTR programDataPath;
 	HRESULT hr = SHGetKnownFolderPath(FOLDERID_ProgramData, 0, NULL, &programDataPath);
 	if (!SUCCEEDED(hr))
 		return;
 
+	// 加载 电影工具Dll
+	ThreadSleep(1000);
 	{
 		// 构建 电影工具DLL 文件路径
 		std::filesystem::path dllPath = std::filesystem::path(programDataPath) / "BF1CinematicTools" / "CTBF1" / "CT_BF1.dll";
@@ -116,8 +104,8 @@ void Core()
 		LoadLibraryW(dllPath.wstring().c_str());
 	}
 
-	ThreadSleep(200);
-
+	// 加载 马恩Dll
+	ThreadSleep(1000);
 	{
 		// 构建 马恩DLL 文件路径
 		std::filesystem::path dllPath = std::filesystem::path(programDataPath) / "BF1CinematicTools" / "Marne" / "Marne.dll";
