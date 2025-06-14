@@ -2,7 +2,7 @@
 
 战地1电影工具箱 By CrazyZhang666
 
-![image](https://github.com/user-attachments/assets/6699899c-86ba-49a3-aa1c-dde01b9b0e1e)
+![image](https://github.com/user-attachments/assets/d188b05a-c981-4fa4-83a7-5ffc8dd9ff35)
 
 # 相关下载
 
