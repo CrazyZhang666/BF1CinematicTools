@@ -33,12 +33,8 @@ public static class CoreUtil
     public static string File_Config_PlayerName { get; private set; }
 
     public static string File_Frosty_FrostyModManager { get; private set; }
-
-    public static string File_Marne_MarneDll { get; private set; }
     public static string File_Marne_MarneLauncher { get; private set; }
-
     public static string File_Service_EADesktop { get; private set; }
-    public static string File_Service_Notepad4 { get; private set; }
     #endregion
 
     //////////////////////////////////
@@ -103,12 +99,8 @@ public static class CoreUtil
         File_Config_PlayerName = Path.Combine(Dir_Config, "PlayerName.txt");
 
         File_Frosty_FrostyModManager = Path.Combine(Dir_Frosty, "FrostyModManager.exe");
-
         File_Marne_MarneLauncher = Path.Combine(Dir_Marne, "MarneLauncher.exe");
-        File_Marne_MarneDll = Path.Combine(Dir_Marne, "Marne.dll");
-
         File_Service_EADesktop = Path.Combine(Dir_Service, "EADesktop.exe");
-        File_Service_Notepad4 = Path.Combine(Dir_Service, "Notepad4.exe");
         #endregion
 
         VersionInfo = Application.ResourceAssembly.GetName().Version;
@@ -132,7 +124,6 @@ public static class CoreUtil
 
         ProcessHelper.CloseProcess("EADesktop");
         ProcessHelper.CloseProcess("Origin");
-        ProcessHelper.CloseProcess("Notepad4");
         ProcessHelper.CloseProcess("FrostyModManager");
         ProcessHelper.CloseProcess("MarneLauncher");
         ProcessHelper.CloseProcess("EAappEmulater");

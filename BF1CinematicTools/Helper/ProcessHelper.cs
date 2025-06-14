@@ -1,5 +1,4 @@
 ﻿using BF1CinematicTools.Native;
-using BF1CinematicTools.Utils;
 
 namespace BF1CinematicTools.Helper;
 
@@ -163,28 +162,6 @@ public static class ProcessHelper
         catch (Exception ex)
         {
             LoggerHelper.Error($"清理进程内存异常 {appName}", ex);
-        }
-    }
-
-    /// <summary>
-    /// 使用 Notepad4 编辑文本文件
-    /// </summary>
-    /// <param name="args"></param>
-    public static void Notepad4EditTextFile(string args)
-    {
-        try
-        {
-            if (!File.Exists(args))
-            {
-                LoggerHelper.Warn($"使用 Notepad4 编辑文本文件路径不存在 {args}");
-                return;
-            }
-
-            Process.Start(CoreUtil.File_Service_Notepad4, args);
-        }
-        catch (Exception ex)
-        {
-            LoggerHelper.Error($"使用 Notepad4 编辑文本文件异常", ex);
         }
     }
 }

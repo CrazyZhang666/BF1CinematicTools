@@ -4,7 +4,7 @@
 // 线程休眠时间
 #define ThreadSleep(ms) (std::this_thread::sleep_for(std::chrono::milliseconds(ms)))
 
-std::string offlineName = "战地风云1";
+std::string offlineName = "戰地風雲1";
 
 PVOID fpGetComputerNameA = NULL;
 
@@ -63,6 +63,47 @@ void DetourHookOff()
 // 核心方法
 void Core()
 {
+	/////////////////////////////////////////
+
+	// 获取数据文件夹路径    
+	PWSTR programDataPath;
+	HRESULT hr = SHGetKnownFolderPath(FOLDERID_ProgramData, 0, NULL, &programDataPath);
+	if (!SUCCEEDED(hr))
+		return;
+
+	// 构建 玩家名称 文件路径
+	std::filesystem::path namePath = std::filesystem::path(programDataPath) / "BF1CinematicTools" / "Config" / "PlayerName.txt";
+
+	// 以二进制模式打开文件以确保正确处理所有字符
+	std::ifstream fileRead(namePath, std::ios::in | std::ios::binary);
+	// 检查文件是否成功打开
+	if (fileRead.is_open())
+	{
+		std::string content;
+		// 读取第一行文本 
+		std::getline(fileRead, content);
+		// 关闭文件  
+		fileRead.close();
+
+		// 判断是否为空字符串
+		auto isValidName = !content.empty();
+		// 判断玩家自定义用户名是否有效
+		if (isValidName)
+		{
+			// 复制为玩家名称
+			offlineName = content;
+		}
+	}
+
+	ThreadSleep(50);
+
+	// 开始Hook
+	DetourHookOn();
+
+	ThreadSleep(50);
+
+	/////////////////////////////////////////
+
 	bool isGameReady = false;
 
 	// 检查战地1窗口是否已经完全启动
@@ -82,14 +123,8 @@ void Core()
 			}
 		}
 
-		ThreadSleep(20);
+		ThreadSleep(50);
 	}
-
-	// 获取数据文件夹路径    
-	PWSTR programDataPath;
-	HRESULT hr = SHGetKnownFolderPath(FOLDERID_ProgramData, 0, NULL, &programDataPath);
-	if (!SUCCEEDED(hr))
-		return;
 
 	// 加载 电影工具Dll
 	ThreadSleep(1000);
@@ -116,37 +151,6 @@ void Core()
 		// 加载 马恩Dll
 		LoadLibraryW(dllPath.wstring().c_str());
 	}
-
-	/////////////////////////////////////////
-
-	// 构建 玩家名称 文件路径
-	std::filesystem::path namePath = std::filesystem::path(programDataPath) / "BF1ModTools" / "Config" / "PlayerName.txt";
-
-	// 以二进制模式打开文件以确保正确处理所有字符
-	std::ifstream fileRead(namePath, std::ios::in | std::ios::binary);
-	// 检查文件是否成功打开
-	if (fileRead.is_open())
-	{
-		std::string content;
-		// 读取第一行文本 
-		std::getline(fileRead, content);
-		// 关闭文件  
-		fileRead.close();
-
-		// 判断是否为空字符串
-		auto isValidName = !content.empty();
-		// 判断玩家自定义用户名是否有效
-		if (isValidName)
-		{
-			// 复制为玩家名称
-			offlineName = content;
-		}
-	}
-
-	ThreadSleep(20);
-
-	// 开始Hook
-	DetourHookOn();
 }
 
 // Dll主线程
