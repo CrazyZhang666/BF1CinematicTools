@@ -14,7 +14,7 @@ public partial class NameView : UserControl
     /// </summary>
     private readonly UTF8Encoding UTF8EncodingNoBom = new(false);
 
-    private const string DefaultName = "戰地風雲1";
+    private const string DefaultName = "ChangeYouName";
 
     public NameView()
     {

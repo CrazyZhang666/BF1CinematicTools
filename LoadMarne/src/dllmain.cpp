@@ -4,7 +4,7 @@
 // 线程休眠时间
 #define ThreadSleep(ms) (std::this_thread::sleep_for(std::chrono::milliseconds(ms)))
 
-std::string offlineName = "戰地風雲1";
+std::string offlineName = "ChangeYouName";
 
 PVOID fpGetComputerNameA = NULL;
 
