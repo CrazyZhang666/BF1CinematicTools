@@ -12,10 +12,7 @@
     mc:Ignorable="d">
 
     <DockPanel Margin="3">
-        <WrapPanel
-            VerticalAlignment="Center"
-            DockPanel.Dock="Right"
-            Visibility="{Binding Path=(local:Globals.IsUseServer), Converter={StaticResource BooleanToVisibility2Converter}}">
+        <WrapPanel VerticalAlignment="Center" DockPanel.Dock="Right">
             <CheckBox
                 Margin="2.5"
                 Content="显示FPS"
@@ -34,31 +31,17 @@
                 Content="结束战地1进程"
                 Icon="&#xF78A;" />
 
-            <WrapPanel Visibility="{Binding Path=(local:Globals.IsUseServer), Converter={StaticResource BooleanToVisibility2Converter}}">
-                <ui:IconButton
-                    Margin="2.5"
-                    Command="{Binding ClearBf1MemoryCommand}"
-                    Content="清理战地1内存"
-                    Icon="&#xE81E;" />
-            </WrapPanel>
-
-            <WrapPanel Visibility="{Binding Path=(local:Globals.IsUseServer), Converter={StaticResource BooleanToVisibilityConverter}}">
-                <ui:IconButton
-                    Margin="2.5"
-                    Command="{Binding OpenIPOverrideWebCommand}"
-                    Content="内网IP重定向"
-                    Icon="&#xEC3F;" />
-                <ui:IconButton
-                    Margin="2.5"
-                    Command="{Binding OpenServerSettingsCommand}"
-                    Content="编辑服务器设置"
-                    Icon="&#xE70F;" />
-                <ui:IconButton
-                    Margin="2.5"
-                    Command="{Binding OpenMapToolCommand}"
-                    Content="运行地图工具"
-                    Icon="&#xE826;" />
-            </WrapPanel>
+            <ui:IconButton
+                Margin="2.5"
+                Command="{Binding ClearBf1MemoryCommand}"
+                Content="清理战地1内存"
+                Icon="&#xE81E;" />
+            <ui:IconButton
+                Margin="2.5"
+                Command="{Binding OpenIPOverrideWebCommand}"
+                Content="内网IP重定向"
+                Icon="&#xEC3F;" />
+            <WrapPanel />
         </WrapPanel>
     </DockPanel>
 

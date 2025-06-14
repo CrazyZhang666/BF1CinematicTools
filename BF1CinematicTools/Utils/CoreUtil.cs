@@ -134,42 +134,6 @@ public static class CoreUtil
         ProcessHelper.CloseProcess("EAappEmulater");
 
         ProcessHelper.CloseProcess("bf1");
-        ProcessHelper.CloseProcess("EAAntiCheat.GameServiceLauncher");
-    }
-
-    /// <summary>
-    /// 清理游戏目录第三方文件
-    /// </summary>
-    public static void ClearGameDirThirdFile()
-    {
-        FileHelper.DeleteFileAsync(Path.Combine(Globals.BF1InstallDir, "dinput8.dll"));
-        FileHelper.DeleteFileAsync(Path.Combine(Globals.BF1InstallDir, "CryptBase.dll"));
-    }
-
-    /// <summary>
-    /// 判断是否管理员权限运行
-    /// </summary>
-    public static bool IsRunAsAdmin()
-    {
-        var current = WindowsIdentity.GetCurrent();
-        var windowsPrincipal = new WindowsPrincipal(current);
-        return windowsPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
-    }
-
-    /// <summary>
-    /// 获取是否管理员运行字符串
-    /// </summary>
-    public static string GetIsAdminStr()
-    {
-        return IsRunAsAdmin() ? "管理员" : "非管理员";
-    }
-
-    /// <summary>
-    /// 获取是否管理员运行字符串
-    /// </summary>
-    public static string GetWorkMode()
-    {
-        return Globals.IsUseServer ? "服务端模式" : "客户端模式";
     }
 
     /// <summary>

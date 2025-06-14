@@ -90,6 +90,7 @@
   <ItemGroup>
     <ClInclude Include="src\detours.h" />
     <ClInclude Include="src\framework.h" />
+    <ClInclude Include="src\SDK.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp" />

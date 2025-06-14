@@ -70,17 +70,6 @@ public static class Globals
     ///////////////////////////////////
 
     /// <summary>
-    /// 是否使用服务端工作模式
-    /// </summary>
-    public static bool IsUseServer
-    {
-        get => ReadBoolean("Mode", "IsUseServer");
-        set => WriteBoolean("Mode", "IsUseServer", value);
-    }
-
-    ///////////////////////////////////
-
-    /// <summary>
     /// 是否使用模组运行游戏
     /// </summary>
     public static bool IsUseMod
@@ -106,10 +95,6 @@ public static class Globals
         LoggerHelper.Info($"当前配置文件路径 {_iniPath}");
 
         ///////////////////////////
-
-        // 如果此节点为空，则默认禁用
-        if (IniHelper.IsKeyEmpty("Mode", "IsUseServer", _iniPath))
-            IsUseServer = false;
 
         // 如果此节点为空，则默认启用
         if (IniHelper.IsKeyEmpty("Mode", "IsUseMod", _iniPath))

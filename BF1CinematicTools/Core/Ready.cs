@@ -25,13 +25,6 @@ public static class Ready
             LoggerHelper.Info("正在启动EA看门狗服务...");
             EaWatchDog.Run();
 
-            // 仅非服务器模式下运行
-            //if (!Globals.IsUseServer)
-            //{
-            //    LoggerHelper.Info("正在启动战地1微服务...");
-            //    MicroServer.Run();
-            //}
-
             // 检查EA App注册表
             RegistryHelper.CheckAndAddEaAppRegistryKey();
         }
@@ -57,17 +50,8 @@ public static class Ready
             LoggerHelper.Info("正在停止EA看门狗服务...");
             EaWatchDog.Stop();
 
-            // 仅非服务器模式下运行
-            //if (!Globals.IsUseServer)
-            //{
-            //    LoggerHelper.Info("正在停止战地1微服务...");
-            //    MicroServer.Stop();
-            //}
-
             // 关闭服务进程
             CoreUtil.CloseServiceProcess();
-            // 清理游戏目录第三方文件
-            CoreUtil.ClearGameDirThirdFile();
         }
         catch (Exception ex)
         {

@@ -44,7 +44,7 @@ public partial class MainWindow
     {
         LoggerHelper.Info("启动主程序成功");
 
-        Title = $"战地1电影工具箱 v{CoreUtil.VersionInfo} - {CoreUtil.GetWorkMode()}";
+        Title = $"战地1电影工具箱 v{CoreUtil.VersionInfo}";
 
         // 向外暴露主窗口实例
         MainWinInstance = this;

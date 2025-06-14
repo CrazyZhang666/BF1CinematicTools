@@ -101,30 +101,16 @@ public static class Game
 
             var strBuilder = new StringBuilder();
 
-            // 以服务端模式运行
-            if (Globals.IsUseServer)
-            {
-                strBuilder.Append("-mserver -serverInstancePath ./Instance/");
-            }
-            else
-            {
-                // 确保离线模式
-                strBuilder.Append("-Online.ServiceNameOverride battlefield-1-xone");
+            // 确保离线模式
+            strBuilder.Append("-Online.ServiceNameOverride battlefield-1-xone");
 
-                // 是否显示Fps
-                if (Globals.IsDrawFps)
-                    strBuilder.Append(" -PerfOverlay.DrawFps true");
-            }
+            // 是否显示Fps
+            if (Globals.IsDrawFps)
+                strBuilder.Append(" -PerfOverlay.DrawFps true");
 
             // 是否使用Mod
             if (Globals.IsUseMod)
                 strBuilder.Append(" -dataPath ./ModData/Marne");
-
-            // 解锁人数限制
-            //strBuilder.Append(" -BFServer.RoundMaxPlayerCount 100");
-            //strBuilder.Append(" -BFServer.RoundRestartCountdown 100");
-            //strBuilder.Append(" -Game.MaxPlayerCount 100");
-            //strBuilder.Append(" -Network.MaxClientCount 100");
 
             var startInfo = new ProcessStartInfo
             {

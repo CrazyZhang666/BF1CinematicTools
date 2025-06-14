@@ -106,7 +106,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="Assets\Files\Data\dinput8.dll" />
 		<EmbeddedResource Include="Assets\Files\Data\Frosty.zip" />
 		<EmbeddedResource Include="Assets\Files\Data\Marne.zip" />
 		<EmbeddedResource Include="Assets\Files\Data\PROFSAVE.zip" />
@@ -139,7 +138,6 @@
 		<EmbeddedResource Include="Assets\Files\LSX\25.xml" />
 		<EmbeddedResource Include="Assets\Files\LSX\26.xml" />
 		<EmbeddedResource Include="Assets\Files\LSX\27.xml" />
-		<EmbeddedResource Include="Assets\Files\Docs\ServerSettings.txt" />
 	</ItemGroup>
 
 </Project>

@@ -1,6 +1,5 @@
 ﻿using BF1CinematicTools.Helper;
 using BF1CinematicTools.Utils;
-using BF1CinematicTools.Windows;
 using CommunityToolkit.Mvvm.Input;
 
 namespace BF1CinematicTools.Views;
@@ -78,39 +77,5 @@ public partial class ToolsView : UserControl
     private void OpenIPOverrideWeb()
     {
         ProcessHelper.OpenLink("https://marne.io/api/override.php");
-    }
-
-    [RelayCommand]
-    private void OpenServerSettings()
-    {
-        var settings = Path.Combine(Globals.BF1InstallDir, "Instance\\ServerSettings.txt");
-
-        // 检查路径文件夹是否存在，不存在则自动创建
-        var dirPath = Path.GetDirectoryName(settings);
-        if (!Directory.Exists(dirPath))
-            Directory.CreateDirectory(dirPath);
-
-        // 如果文件不存，则创建一个新文件
-        if (!File.Exists(settings))
-        {
-            var text = FileHelper.GetEmbeddedResourceText("Docs.ServerSettings.txt");
-            File.WriteAllText(settings, text);
-        }
-
-        ProcessHelper.Notepad4EditTextFile(settings);
-    }
-
-    [RelayCommand]
-    private void OpenMapTool()
-    {
-        // 马恩地图工具
-        var mapWindow = new MapWindow
-        {
-            Owner = MainWindow.MainWinInstance
-        };
-
-        MainWindow.MainWinInstance.IsShowMaskLayer = true;
-        mapWindow.ShowDialog();
-        MainWindow.MainWinInstance.IsShowMaskLayer = false;
     }
 }

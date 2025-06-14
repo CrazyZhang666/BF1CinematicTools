@@ -77,26 +77,10 @@
                     Text="{Binding LoadModel.Bf1Path, UpdateSourceTrigger=PropertyChanged}" />
             </DockPanel>
 
-            <DockPanel>
-                <ui:IconHeader
-                    Title="软件运行模式"
-                    Margin="5"
-                    VerticalAlignment="Center" />
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <ui:ImageRadioButton
-                        Margin="5"
-                        d:IsChecked="True"
-                        Content="客户端"
-                        GroupName="WorkMode"
-                        IsChecked="{Binding ElementName=RadioButton_UseServer, Path=IsChecked, Converter={StaticResource InverseBooleanConverter}}" />
-                    <ui:ImageRadioButton
-                        x:Name="RadioButton_UseServer"
-                        Margin="5"
-                        Content="服务端"
-                        GroupName="WorkMode"
-                        IsChecked="{Binding Path=(local:Globals.IsUseServer)}" />
-                </StackPanel>
-            </DockPanel>
+            <ui:IconHeader
+                Title="初始化日志"
+                Margin="5"
+                VerticalAlignment="Center" />
         </StackPanel>
 
         <ui:IconButton

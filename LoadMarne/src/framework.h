@@ -12,10 +12,13 @@
 #include <ShlObj_core.h>
 #include <fstream>
 #include <iostream>
+#include <thread>
 
 #include "detours.h"
 
 #pragma comment(lib, "detours.lib")
+
+#include "SDK.hpp"
 
 #pragma comment(linker, "/export:DirectInput8Create=C:\\WINDOWS\\System32\\dinput8.DirectInput8Create,@1")
 #pragma comment(linker, "/export:DllCanUnloadNow=C:\\WINDOWS\\System32\\dinput8.DllCanUnloadNow,@2")

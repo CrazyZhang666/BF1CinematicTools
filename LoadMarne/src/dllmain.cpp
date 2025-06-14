@@ -1,7 +1,9 @@
 ﻿// dllmain.cpp : 定义 DLL 应用程序的入口点。
 #include "framework.h"
 
-std::wstring className = L"HwndWrapper[BF1CinematicTools;;";
+// 线程休眠时间
+#define ThreadSleep(ms) (std::this_thread::sleep_for(std::chrono::milliseconds(ms)))
+
 std::string offlineName = "战地风云1";
 
 PVOID fpGetComputerNameA = NULL;
@@ -13,36 +15,6 @@ BOOL WINAPI HKGetComputerNameA(LPSTR lpBuffer, LPDWORD lpnSize)
 	strcpy(lpBuffer, offlineName.c_str());
 
 	return TRUE;
-}
-
-// 根据类名模糊查找，返回是否找到布尔值
-bool FindWindowByClassName(const std::wstring& className)
-{
-	HWND hwnd = nullptr;
-	while ((hwnd = FindWindowExW(nullptr, hwnd, nullptr, nullptr)) != nullptr)
-	{
-		wchar_t buffer[256];
-		GetClassNameW(hwnd, buffer, sizeof(buffer) / sizeof(wchar_t));
-
-		// 使用wcsstr函数进行模糊匹配
-		if (wcsstr(buffer, className.c_str()) != nullptr)
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-// 去除首尾空白符
-std::string& Trim(std::string& str)
-{
-	if (str.empty())
-		return str;
-
-	str.erase(0, str.find_first_not_of(" "));
-	str.erase(str.find_last_not_of(" ") + 1);
-	return str;
 }
 
 // 开始Hook
@@ -103,38 +75,29 @@ void MemPath(__int64 patch, BYTE value)
 // 核心方法
 void Core()
 {
-	// 绕过EAAC启动限制
-	HMODULE user32Ptr = GetModuleHandle(L"user32.dll");
-	if (user32Ptr != nullptr)
-		MemPath((DWORD_PTR)GetProcAddress(user32Ptr, "MessageBoxTimeoutA"), 0xC3);
+	bool isGameReady = false;
 
-	HMODULE kernelbasePtr = GetModuleHandle(L"kernelbase.dll");
-	if (kernelbasePtr != nullptr)
-		MemPath((DWORD_PTR)GetProcAddress(kernelbasePtr, "TerminateProcess"), 0xC3);
+	// 检查战地1窗口是否已经完全启动
+	// 12 = ClientState_Ingame
+	while (!isGameReady)
+	{
+		Main* pMain = Main::GetInstance();
+		if (IsValidPtr(pMain))
+		{
+			Client* pClient = pMain->m_Client;
+			if (IsValidPtr(pClient))
+			{
+				if (pClient->m_clientState == 12)
+				{
+					isGameReady = true;
+				}
+			}
+		}
 
-	//////////////////////////////////////////////////////////////////////////////////
+		ThreadSleep(20);
+	}
 
-	// 关闭显卡驱动检测
-	MemPath(0x1410365CC, 0x90);
-	MemPath(0x1410365CD, 0x90);
-	MemPath(0x1410365D2, 0x90);
-	MemPath(0x1410365D3, 0x90);
-	MemPath(0x14031CDA1, 0x84);
-
-	// 解锁完整命令控制台
-	MemPath(0x1403396F1, 0x90);
-	MemPath(0x1403396F2, 0x90);
-	MemPath(0x1403396F3, 0x90);
-	MemPath(0x1403396F4, 0x90);
-	MemPath(0x1403396F5, 0x90);
-	MemPath(0x1403396F6, 0x90);
-
-	//////////////////////////////////////////////////////////////////////////////////
-
-	// 查找战地1电影工具箱窗口
-	bool isFindWin = FindWindowByClassName(className);
-	if (!isFindWin)
-		return;
+	ThreadSleep(200);
 
 	// 获取数据文件夹路径    
 	PWSTR programDataPath;
@@ -142,42 +105,34 @@ void Core()
 	if (!SUCCEEDED(hr))
 		return;
 
-	// 构建 马恩DLL 文件路径
-	std::filesystem::path dllPath = std::filesystem::path(programDataPath) / "BF1CinematicTools" / "Marne" / "Marne.dll";
-	// 检查文件是否存在
-	if (!std::filesystem::exists(dllPath))
-		return;
-
-	// 加载 马恩Dll
-	LoadLibraryW(dllPath.wstring().c_str());
-
-	//////////////////////////////////////////////////////////////////////////////////
-
-	// 判断是以客户端模式运行，还是服务端模式运行
-
-	// 获取命令行字符串
-	LPSTR cmdLine = GetCommandLineA();
-	// 将命令行字符串转换为std::string
-	std::string cmdLineString(cmdLine);
-	// 使用std::string::find查找子字符串
-	size_t pos = cmdLineString.find("-mserver");
-	// 如果找到了子字符串，find方法会返回它在字符串中的位置（从0开始）  
-	// 如果没有找到，它会返回std::string::npos 
-	if (pos != std::string::npos)
 	{
-		// 代表是以服务端模式运行
+		// 构建 电影工具DLL 文件路径
+		std::filesystem::path dllPath = std::filesystem::path(programDataPath) / "BF1CinematicTools" / "CTBF1" / "CT_BF1.dll";
+		// 检查文件是否存在
+		if (!std::filesystem::exists(dllPath))
+			return;
 
-		Sleep(20);
-		// 刷新控制台状态
-		std::cout.clear();
+		// 加载 电影工具Dll
+		LoadLibraryW(dllPath.wstring().c_str());
+	}
 
-		return;
+	ThreadSleep(200);
+
+	{
+		// 构建 马恩DLL 文件路径
+		std::filesystem::path dllPath = std::filesystem::path(programDataPath) / "BF1CinematicTools" / "Marne" / "Marne.dll";
+		// 检查文件是否存在
+		if (!std::filesystem::exists(dllPath))
+			return;
+
+		// 加载 马恩Dll
+		LoadLibraryW(dllPath.wstring().c_str());
 	}
 
 	/////////////////////////////////////////
 
 	// 构建 玩家名称 文件路径
-	std::filesystem::path namePath = std::filesystem::path(programDataPath) / "BF1CinematicTools" / "Config" / "PlayerName.txt";
+	std::filesystem::path namePath = std::filesystem::path(programDataPath) / "BF1ModTools" / "Config" / "PlayerName.txt";
 
 	// 以二进制模式打开文件以确保正确处理所有字符
 	std::ifstream fileRead(namePath, std::ios::in | std::ios::binary);
@@ -187,8 +142,6 @@ void Core()
 		std::string content;
 		// 读取第一行文本 
 		std::getline(fileRead, content);
-		// 去除首尾空白符
-		Trim(content);
 		// 关闭文件  
 		fileRead.close();
 
@@ -202,7 +155,8 @@ void Core()
 		}
 	}
 
-	Sleep(20);
+	ThreadSleep(20);
+
 	// 开始Hook
 	DetourHookOn();
 }
