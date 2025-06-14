@@ -67,14 +67,6 @@ public static class EaWatchDog
                             continue;
                         }
                     }
-
-                    // 结束 EAAntiCheat.GameServiceLauncher 进程树
-                    if (process.ProcessName.Equals("EAAntiCheat.GameServiceLauncher", StringComparison.OrdinalIgnoreCase))
-                    {
-                        process.Kill(true);
-                        LoggerHelper.Info("结束 EAAntiCheat.GameServiceLauncher 进程树成功");
-                        continue;
-                    }
                 }
             }
             catch (Exception ex)
