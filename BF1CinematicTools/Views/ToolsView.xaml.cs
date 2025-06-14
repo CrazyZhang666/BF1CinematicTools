@@ -1,7 +1,6 @@
 ﻿using BF1CinematicTools.Helper;
 using BF1CinematicTools.Utils;
 using CommunityToolkit.Mvvm.Input;
-using System.Threading.Tasks;
 
 namespace BF1CinematicTools.Views;
 
@@ -34,7 +33,7 @@ public partial class ToolsView : UserControl
             if (File.Exists(imguiIniFile))
                 await FileHelper.DeleteFileAsync(imguiIniFile);
 
-            NotifierHelper.Success("执行电影工具数据操作成功");
+            NotifierHelper.Success("执行清理电影工具数据操作成功");
         }
         catch (Exception ex)
         {
